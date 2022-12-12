@@ -372,6 +372,7 @@ globexp2(const Char *ptr, const Char *pattern, glob_t *pglob,
 
 
 
+#if 0
 /*
  * expand tilde from the passwd file.
  */
@@ -431,6 +432,7 @@ globtilde(const Char *pattern, Char *patbuf, size_t patbuf_len, glob_t *pglob)
 
 	return patbuf;
 }
+#endif
 
 static int
 g_strncmp(const Char *s1, const char *s2, size_t n)
@@ -488,7 +490,11 @@ glob0(const Char *pattern, glob_t *pglob, struct glob_lim *limitp)
 	int c, err, oldpathc;
 	Char *bufnext, patbuf[PATH_MAX];
 
+#if 0
 	qpatnext = globtilde(pattern, patbuf, PATH_MAX, pglob);
+#else
+	qpatnext = pattern;
+#endif
 	oldpathc = pglob->gl_pathc;
 	bufnext = patbuf;
 
